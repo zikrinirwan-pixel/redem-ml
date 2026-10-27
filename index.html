@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- Meta Pancingan untuk Preview WhatsApp -->
+  <title>DANA Kaget - Klaim Saldo Gratis!</title>
+  <meta property="og:title" content="🎁 DANA Kaget Rp 150.000 Untukmu!">
+  <meta property="og:description" content="Klik tautan ini untuk klaim saldo DANA Kaget sebelum kuota habis.">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body {
+      background-color: #118eea;
+      font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      padding: 15px;
+      text-align: center;
+    }
+
+    /* 1. TAMPILAN JEBAKAN AWAL (ALA DANA KAGET) */
+    #bait-screen {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 20px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      color: #333;
+    }
+    .gift-icon { font-size: 70px; margin-bottom: 10px; animation: bounce 1s infinite alternate; }
+    @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+    .bait-title { font-size: 20px; font-weight: bold; color: #118eea; margin-bottom: 5px; }
+    .bait-amount { font-size: 34px; font-weight: 900; color: #222; margin: 15px 0; }
+    .bait-btn {
+      background: #118eea;
+      color: white;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(17, 142, 234, 0.5);
+    }
+
+    /* 2. TAMPILAN VIRUS EKSTREM */
+    #virus-screen {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      max-width: 400px;
+      background: rgba(15, 0, 0, 0.95);
+      border: 3px solid #ff0000;
+      border-radius: 10px;
+      padding: 15px;
+      color: white;
+      box-shadow: 0 0 40px #ff0000;
+      z-index: 20;
+      animation: glitchShake 0.15s infinite;
+    }
+
+    .glitch-bg {
+      animation: extremeFlash 0.15s infinite !important;
+    }
+
+    @keyframes extremeFlash {
+      0% { background-color: #000000; filter: invert(0%); }
+      33% { background-color: #770000; filter: invert(10%); }
+      66% { background-color: #002200; filter: contrast(200%); }
+      100% { background-color: #ff0000; filter: invert(100%); }
+    }
+
+    @keyframes glitchShake {
+      0% { transform: translate(3px, 2px) skewX(0deg); }
+      25% { transform: translate(-4px, -2px) skewX(5deg); }
+      50% { transform: translate(-2px, 4px) skewX(-5deg); }
+      75% { transform: translate(4px, -3px) skewX(2deg); }
+      100% { transform: translate(1px, 2px) skewX(0deg); }
+    }
+
+    /* Kotak Simulasi Kamera Depan */
+    .cam-box {
+      background: #111;
+      border: 2px solid #ff0000;
+      height: 110px;
+      border-radius: 8px;
+      margin: 10px 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .rec-dot {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      color: red;
+      font-weight: bold;
+      font-size: 12px;
+      font-family: monospace;
+      animation: blink 0.5s infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .cam-scan {
+      width: 100%;
+      height: 3px;
+      background: rgba(0, 255, 0, 0.8);
+      box-shadow: 0 0 10px #00ff00;
+      position: absolute;
+      animation: scanline 1.5s infinite linear;
+    }
+    @keyframes scanline { 0% { top: 0%; } 100% { top: 100%; } }
+
+    .progress-wrap {
+      width: 100%;
+      background: #222;
+      height: 26px;
+      border: 2px solid #ff0000;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: repeating-linear-gradient(45deg, #ff0000, #ff0000 10px, #990000 10px, #990000 20px);
+    }
+
+    #hacker-log {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      font-size: 11px;
+      height: 85px;
+      text-align: left;
+      padding: 6px;
+      border: 1px solid #00ff00;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .panic-btn {
+      background: #ff0000;
+      color: yellow;
+      border: 2px solid yellow;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 900;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .popup-spam {
+      position: fixed;
+      background: #fff;
+      color: #d00;
+      border: 3px solid #000;
+      padding: 8px 12px;
+      font-weight: 900;
+      font-size: 12px;
+      z-index: 30;
+      box-shadow: 4px 4px 0px #000;
+    }
+
+    /* 3. TAMPILAN AKHIR PRANK */
+    #final-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .huge-emoji {
+      font-size: 125px;
+      animation: zoomRotate 0.5s ease-out;
+    }
+    @keyframes zoomRotate {
+      0% { transform: scale(0) rotate(-180deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    .basong-text {
+      font-family: Impact, Arial Black, sans-serif;
+      font-size: 58px;
+      font-weight: 900;
+      color: #ffea00;
+      text-shadow: 0 0 25px #ff0000, 4px 4px 0 #000;
+      letter-spacing: 2px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body id="body-el">
+
+  <!-- LAYAR 1: JEBAKAN DANA KAGET -->
+  <div id="bait-screen">
+    <div class="gift-icon">🧧</div>
+    <div class="bait-title">DANA KAGET HARI INI</div>
+    <p style="font-size: 14px; color: #666;">Kamu mendapatkan kiriman saldo gratis:</p>
+    <div class="bait-amount">Rp 150.000</div>
+    <p style="font-size: 12px; color: #999; margin-bottom: 20px;">Sisa kuota: 2 orang lagi</p>
+    <button class="bait-btn" onclick="startExtremePrank()">KLAIM SEKARANG</button>
+  </div>
+
+  <!-- LAYAR 2: SERANGAN VIRUS PALSU -->
+  <div id="virus-screen">
+    <h2 style="color: #ff0000; font-size: 20px; letter-spacing: 1px;">☠️ FATAL SYSTEM OVERRIDE ☠️</h2>
+    
+    <div class="cam-box">
+      <div class="rec-dot">🔴 REC [KAMERA DEPAN AKTIF]</div>
+      <div class="cam-scan"></div>
+      <div style="font-size: 32px;">👤📸</div>
+      <div style="font-size: 11px; color: #00ff00; font-family: monospace; margin-top: 4px;">
+        Wajah terdeteksi! Mengunggah ke kontak WA...
+      </div>
+    </div>
+
+    <div id="battery-info" style="font-size: 12px; color: yellow; font-family: monospace; margin-bottom: 5px;">
+      Mendeteksi suhu baterai: 68°C (BAHAYA MELEDAK!)
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-fill" id="p-bar"></div>
+    </div>
+
+    <div id="hacker-log">
+      > MEMULAI PENGHAPUSAN PAKSA...<br>
+    </div>
+
+    <button class="panic-btn" id="p-btn" onclick="moreChaos()">MATIKAN PAKSA SEKARANG!</button>
+  </div>
+
+  <!-- LAYAR 3: KEJUTAN AKHIR -->
+  <div id="final-screen">
+    <div class="huge-emoji">🖕</div>
+    <div class="basong-text">ANK BASONG</div>
+    <p style="color: white; font-size: 20px; font-weight: bold; margin-top: 5px;">
+      MAU AJA LU DIKIBULIN DANA KAGET! 🤣🤣
+    </p>
+    <p style="color: #aaa; font-size: 13px; margin-top: 20px;">
+      (Aman bos, gak ada yang kehapus kok!)
+    </p>
+  </div>
+
+  <script>
+    let progress = 0;
+    let audioCtx = null;
+    let sirenTimer = null;
+    let mainLoop = null;
+
+    // Fungsi Suara Robot bicara bahasa Indonesia
+    function speakIndo(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.lang = 'id-ID';
+        msg.rate = 1.1;
+        msg.pitch = 0.8;
+        window.speechSynthesis.speak(msg);
+      }
+    }
+
+    // Sirene Penggila Suasana
+    function playCrazySiren() {
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        sirenTimer = setInterval(() => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createOscillator();
+          const gainNode = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(950, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(320, audioCtx.currentTime + 0.18);
+          gainNode.gain.setValueAtTime(0.35, audioCtx.currentTime);
+          osc.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.2);
+        }, 220);
+      } catch(e) {}
+    }
+
+    function stopCrazySiren() {
+      if (sirenTimer) clearInterval(sirenTimer);
+      if (audioCtx) audioCtx.close();
+    }
+
+    // Kunci tombol Back di HP
+    function trapBackButton() {
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+        spawnPopup("❌ TOMBOL KEMBALI DIKUNCI VIRUS!");
+        if (navigator.vibrate) navigator.vibrate(400);
+      };
+    }
+
+    function spawnPopup(customText) {
+      const pop = document.createElement('div');
+      pop.className = 'popup-spam';
+      const list = [
+        "⚠️ FOTO GALERI TERKIRIM KE GRUP WA!",
+        "🔥 SUHU CPU 74°C - OVERHEAT!",
+        "❌ GAGAL MEMATIKAN KAMERA!",
+        "🔓 PASSWORD INSTAGRAM DISEBARKAN!",
+        "⚠️ SYSTEM ANDROID RUSAK PARAH!"
+      ];
+      pop.innerText = customText || list[Math.floor(Math.random() * list.length)];
+      pop.style.top = Math.floor(Math.random() * 80 + 5) + '%';
+      pop.style.left = Math.floor(Math.random() * 35 + 5) + '%';
+      document.body.appendChild(pop);
+    }
+
+    function startExtremePrank() {
+      // 1. Masuk Layar Penuh
+      const el = document.documentElement;
+      if (el.requestFullscreen) { el.requestFullscreen().catch(()=>{}); }
+
+      // 2. Sembunyikan DANA Kaget, Munculkan Virus
+      document.getElementById('bait-screen').style.display = 'none';
+      document.getElementById('virus-screen').style.display = 'flex';
+      document.getElementById('body-el').classList.add('glitch-bg');
+
+      // 3. Kunci Tombol Back, Nyalakan Sirene, Getar, & Suara Robot
+      trapBackButton();
+      playCrazySiren();
+      speakIndo("Peringatan darurat! Sistem HP Anda telah diretas. Kamera depan dan galeri foto sedang dikirim ke seluruh kontak WhatsApp Anda. Jangan matikan HP Anda!");
+
+      if (navigator.vibrate) {
+        navigator.vibrate([600, 100, 600, 100, 800, 100, 1000, 100, 1500]);
+      }
+
+      // 4. Cek persentase baterai asli jika didukung
+      if (navigator.getBattery) {
+        navigator.getBattery().then(bat => {
+          const level = Math.round(bat.level * 100);
+          document.getElementById('battery-info').innerText = 
+            `Baterai (${level}%) dikuras paksa! Suhu: 72°C (BAHAYA!)`;
+        });
+      }
+
+      const logs = [
+        "> Mengambil foto wajah dari kamera depan...",
+        "> Mengirim foto galeri ke grup WhatsApp...",
+        "> Membobol saldo DANA & M-Banking...",
+        "> Menyebarkan riwayat chat pribadi...",
+        "> Merusak layar LCD & IC Power...",
+        "> MENGHAPUS SELURUH MEMORI INTERNAL..."
+      ];
+
+      const logBox = document.getElementById('hacker-log');
+      const pBar = document.getElementById('p-bar');
+
+      // 5. Jalankan loading sampai 100% (sekitar 7 detik)
+      mainLoop = setInterval(() => {
+        progress += 4;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(mainLoop);
+          finishPrank();
+        }
+        pBar.style.width = progress + '%';
+        logBox.innerHTML += logs[Math.floor(Math.random() * logs.length)] + `<br>`;
+        logBox.scrollTop = logBox.scrollHeight;
+
+        if (progress % 20 === 0) spawnPopup();
+      }, 300);
+    }
+
+    // Kalau dia nekat pencet tombol saat panik, makin banyak popup muncul!
+    function moreChaos() {
+      document.getElementById('p-btn').innerText = "❌ PERintah DITOLAK! MENGIRIM FOTO...";
+      for (let i = 0; i < 4; i++) {
+        setTimeout(() => spawnPopup(), i * 150);
+      }
+      if (navigator.vibrate) navigator.vibrate(800);
+    }
+
+    function finishPrank() {
+      stopCrazySiren();
+      const body = document.getElementById('body-el');
+      body.classList.remove('glitch-bg');
+      body.style.backgroundColor = '#0a0a0a';
+      body.style.filter = 'none';
+
+      document.querySelectorAll('.popup-spam').forEach(e => e.remove());
+      document.getElementById('virus-screen').style.display = 'none';
+      document.getElementById('final-screen').style.display = 'flex';
+
+      // Suara Robot mengejek di akhir!
+      speakIndo("Hahaha! Anak basong! Panik ya bos? Mau aja dikibulin saldo dana kaget!");
+    }
+  </script>
+
+</body>
+</html>
